@@ -1,0 +1,160 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Text Page</h1>
+        <textarea id="noteArea" rows="100" cols="300" placeholder="Write your notes here..."></textarea>
+        <br>
+        <button id="saveExitBtn">Save & Exit</button>
+    </div>
+
+    <script>
+        document.getElementById('saveExitBtn').addEventListener('click', function() {
+            // Logic to save data (if any) can be added here
+            const noteContent = document.getElementById('noteArea').value;
+
+            // For demonstration, we can simply log it or alert it
+            alert('Your note has been saved:\n' + noteContent);
+
+            // Redirect or exit
+            window.location.href = 'index.html'; // Redirect to the login page or another page
+        });
+    </script>
+</body>
+</html> -->
+
+<!-- only for text area -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Text Page</h1>
+        <textarea id="noteArea" rows="10" cols="30" placeholder="Write your notes here..."></textarea>
+        <br>
+        <button id="saveExitBtn">Save & Exit</button>
+    </div>
+
+    <script>
+        // Load saved content from local storage when the page is loaded
+        window.onload = function() {
+            const savedNote = localStorage.getItem('userNote');
+            if (savedNote) {
+                document.getElementById('noteArea').value = savedNote;
+            }
+        };
+
+        document.getElementById('saveExitBtn').addEventListener('click', function() {
+            // Save the content of the text area to local storage
+            const noteContent = document.getElementById('noteArea').value;
+            localStorage.setItem('userNote', noteContent);
+
+            alert('Your note has been saved!');
+
+            // Redirect to the login page
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html> -->
+
+<!-- Here for text and files -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Text Page</h1>
+        <textarea id="noteArea" rows="10" cols="30" placeholder="Write your notes here..."></textarea>
+        <br>
+        <button id="saveExitBtn">Save & Exit</button>
+        <br><br>
+
+        <h2>File Upload/Download</h2>
+        <input type="file" id="fileInput" multiple />
+        <button id="uploadBtn">Upload Files</button>
+        <ul id="fileList"></ul>
+        <button id="downloadAllBtn">Download All Files</button>
+    </div>
+
+    <script>
+        // Load saved content from local storage when the page is loaded
+        window.onload = function() {
+            const savedNote = localStorage.getItem('userNote');
+            if (savedNote) {
+                document.getElementById('noteArea').value = savedNote;
+            }
+        };
+
+        document.getElementById('saveExitBtn').addEventListener('click', function() {
+            // Save the content of the text area to local storage
+            const noteContent = document.getElementById('noteArea').value;
+            localStorage.setItem('userNote', noteContent);
+
+            alert('Your note has been saved!');
+
+            // Redirect to the login page
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('uploadBtn').addEventListener('click', function() {
+            const fileInput = document.getElementById('fileInput');
+            const files = fileInput.files;
+
+            if (files.length === 0) {
+                alert('Please select files to upload.');
+                return;
+            }
+
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = ''; // Clear previous list
+
+            Array.from(files).forEach(file => {
+                const li = document.createElement('li');
+                li.textContent = file.name;
+                li.dataset.file = URL.createObjectURL(file);
+                fileList.appendChild(li);
+            });
+        });
+
+        document.getElementById('downloadAllBtn').addEventListener('click', function() {
+            const fileInput = document.getElementById('fileInput');
+            const files = fileInput.files;
+
+            if (files.length === 0) {
+                alert('No files to download.');
+                return;
+            }
+
+            Array.from(files).forEach(file => {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(file);
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
